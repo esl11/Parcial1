@@ -30,32 +30,39 @@ namespace parcial1.Controllers
     }
 
 
-    
+
 
     return View(await footwear.ToListAsync());
 }
 
 
+//RECUPERO EL NOMBRE DE LA EMPRESA DE VENTAS
+public async Task<IActionResult> Details(int? id)
+{
+    if (id == null)
+    {
+        return NotFound();
+    }
+
+    var footwear = await _context.Footwear
+                           .Include(f => f.Store)
+                           .FirstOrDefaultAsync(m => m.Id == id);
+
+    if (footwear == null)
+    {
+        return NotFound();
+    }
+
+    var sName = _context.Store
+                       .FirstOrDefault(s => s.Fname == footwear.Brand.ToString())
+                       ?.Sname;
+
+    ViewData["SName"] = !string.IsNullOrEmpty(sName) ? sName : "Sin stock en tiendas";
+
+    return View(footwear);
+}
 
 
-
-        // GET: Footwear/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Footwear == null)
-            {
-                return NotFound();
-            }
-
-            var footwear = await _context.Footwear
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (footwear == null)
-            {
-                return NotFound();
-            }
-
-            return View(footwear);
-        }
 
         // GET: Footwear/Create
         public IActionResult Create()

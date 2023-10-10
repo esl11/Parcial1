@@ -52,7 +52,13 @@
             @Html.DisplayFor(model => model.PayInInstallments)
         </dd>
         <dt class="col-sm-2">
-         <span>Vista previa:</span>
+        <span> Disponible en :</span>
+        </dt>
+        <dd class = "col-sm-10">
+              @ViewData["SName"] 
+        </dd>
+        <dt class="col-sm-2">
+        <span>Vista previa:</span>
         </dt>
         <dd class="col-sm-10">
         <img src="@Model.ImageUrl" alt="Game Image" width="500" height="400"/>
