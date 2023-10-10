@@ -1,0 +1,64 @@
+@model IEnumerable<parcial1.Models.Footwear>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1>Listado de productos</h1>
+
+
+<p>
+    <a asp-action="Create">Alta de calzado</a>
+</p>
+
+@using (Html.BeginForm("Index", "Footwear", FormMethod.Get))
+{
+    <div class="form-group">
+        <input type="text" name="searchString" class="form-control" placeholder="Buscar por modelo">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>
+}
+
+ <br>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PayInInstallments)
+            </th>
+            <th>
+                <!-- No se muestra la columna de ImageUrl -->
+            </th>
+            <th>
+                Opciones
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            @Html.Partial("_FootwearPartial", item)
+        }
+    </tbody>
+</table>
+
+

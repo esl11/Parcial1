@@ -1,0 +1,81 @@
+@model parcial1.Models.Footwear
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Alta de calzado</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+          <div class="form-group">
+          <label asp-for="Type" class="control-label"></label>
+          @Html.DropDownListFor(model => model.Type, (SelectList)ViewBag.Tipos, "Selecciona un tipo", new { @class = "form-control" })
+          <span asp-validation-for="Type" class="text-danger"></span>
+         </div>
+
+             <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <select asp-for="Brand" class="form-control">
+                    <option value="" disabled selected>Seleccione el fabricante</option>
+                    <option value="Adidas">Adidas</option>
+                    <option value="Nike">Nike</option>
+                    <option value="Puma">Puma</option>
+                </select>
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+     
+            <div class="form-group">
+                <label asp-for="Model" class="control-label"></label>
+                <input asp-for="Model" class="form-control" />
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <select asp-for="Gender" class="form-control">
+                    <option value="" disabled selected>Selecciona un género</option>
+                    <option value="Unisex">Unisex</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="Size" class="control-label"></label>
+            @Html.DropDownListFor(model => model.Size, (SelectList)ViewBag.Talles, "Selecciona un talle", new { @class = "form-control" })
+            <span asp-validation-for="Size" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="PayInInstallments" /> @Html.DisplayNameFor(model => model.PayInInstallments)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver al listado</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
